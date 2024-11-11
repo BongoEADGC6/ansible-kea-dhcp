@@ -6,29 +6,31 @@
     argv:
       - /usr/sbin/kea-admin
       - db-version
-      - "{% if 'type' in kea_dhcp_database_config %}{{ kea_dhcp_database_config.type }}{% else %}{{ omit }}{% endif %}"
-      - "{% if 'user' in kea_dhcp_database_config %}-u {{ kea_dhcp_database_config.user }}{% else %}{{ omit }}{% endif %}"
-      - "{% if 'database' in kea_dhcp_database_config %}-n {{ kea_dhcp_database_config.database }}{% else %}{{ omit }}{% endif %}"
-      - "{% if 'password' in kea_dhcp_database_config %}-p {{ kea_dhcp_database_config.password }}{% else %}{{ omit }}{% endif %}"
-      - "{% if 'port' in kea_dhcp_database_config %}-P {{ kea_dhcp_database_config.port }}{% else %}{{ omit }}{% endif %}"
-      - "{% if 'host' in kea_dhcp_database_config %}-h {{ kea_dhcp_database_config.host }}{% else %}{{ omit }}{% endif %}"
+      - "{% if 'type' in kea_dhcp_database_config %}{{ kea_dhcp_database_config.type }}{% endif %}"
+      - "{% if 'user' in kea_dhcp_database_config %}-u {{ kea_dhcp_database_config.user }}{% endif %}"
+      - "{% if 'database' in kea_dhcp_database_config %}-n {{ kea_dhcp_database_config.database }}{% endif %}"
+      - "{% if 'password' in kea_dhcp_database_config %}-p {{ kea_dhcp_database_config.password }}{% endif %}"
+      - "{% if 'port' in kea_dhcp_database_config %}-P {{ kea_dhcp_database_config.port }}{% endif %}"
+      - "{% if 'host' in kea_dhcp_database_config %}-h {{ kea_dhcp_database_config.host }}{% endif %}"
   register: kea_dhcp_db_version
   changed_when: false
   ignore_errors: true
+  # no_log: true
 
 - name: Initialise Kea DHCP database # noqa: no-changed-when
   ansible.builtin.command:
     argv:
       - /usr/sbin/kea-admin
       - db-init
-      - "{% if 'type' in kea_dhcp_database_config %}{{ kea_dhcp_database_config.type }}{% else %}{{ omit }}{% endif %}"
-      - "{% if 'user' in kea_dhcp_database_config %}-u {{ kea_dhcp_database_config.user }}{% else %}{{ omit }}{% endif %}"
-      - "{% if 'database' in kea_dhcp_database_config %}-n {{ kea_dhcp_database_config.database }}{% else %}{{ omit }}{% endif %}"
-      - "{% if 'password' in kea_dhcp_database_config %}-p {{ kea_dhcp_database_config.password }}{% else %}{{ omit }}{% endif %}"
-      - "{% if 'port' in kea_dhcp_database_config %}-P {{ kea_dhcp_database_config.port }}{% else %}{{ omit }}{% endif %}"
-      - "{% if 'host' in kea_dhcp_database_config %}-h {{ kea_dhcp_database_config.host }}{% else %}{{ omit }}{% endif %}"
+      - "{% if 'type' in kea_dhcp_database_config %}{{ kea_dhcp_database_config.type }}{% endif %}"
+      - "{% if 'user' in kea_dhcp_database_config %}-u {{ kea_dhcp_database_config.user }}{% endif %}"
+      - "{% if 'database' in kea_dhcp_database_config %}-n {{ kea_dhcp_database_config.database }}{% endif %}"
+      - "{% if 'password' in kea_dhcp_database_config %}-p {{ kea_dhcp_database_config.password }}{% endif %}"
+      - "{% if 'port' in kea_dhcp_database_config %}-P {{ kea_dhcp_database_config.port }}{% endif %}"
+      - "{% if 'host' in kea_dhcp_database_config %}-h {{ kea_dhcp_database_config.host }}{% endif %}"
   when: kea_dhcp_db_version is failed
   notify: restart kea-dhcp
+  # no_log: true
     
 
 - name: Update Kea DHCP database # noqa: no-changed-when
@@ -36,13 +38,14 @@
     argv:
       - /usr/sbin/kea-admin
       - db-upgrade
-      - "{% if 'type' in kea_dhcp_database_config %}{{ kea_dhcp_database_config.type }}{% else %}{{ omit }}{% endif %}"
-      - "{% if 'user' in kea_dhcp_database_config %}-u {{ kea_dhcp_database_config.user }}{% else %}{{ omit }}{% endif %}"
-      - "{% if 'database' in kea_dhcp_database_config %}-n {{ kea_dhcp_database_config.database }}{% else %}{{ omit }}{% endif %}"
-      - "{% if 'password' in kea_dhcp_database_config %}-p {{ kea_dhcp_database_config.password }}{% else %}{{ omit }}{% endif %}"
-      - "{% if 'port' in kea_dhcp_database_config %}-P {{ kea_dhcp_database_config.port }}{% else %}{{ omit }}{% endif %}"
-      - "{% if 'host' in kea_dhcp_database_config %}-h {{ kea_dhcp_database_config.host }}{% else %}{{ omit }}{% endif %}"
+      - "{% if 'type' in kea_dhcp_database_config %}{{ kea_dhcp_database_config.type }}{% endif %}"
+      - "{% if 'user' in kea_dhcp_database_config %}-u {{ kea_dhcp_database_config.user }}{% endif %}"
+      - "{% if 'database' in kea_dhcp_database_config %}-n {{ kea_dhcp_database_config.database }}{% endif %}"
+      - "{% if 'password' in kea_dhcp_database_config %}-p {{ kea_dhcp_database_config.password }}{% endif %}"
+      - "{% if 'port' in kea_dhcp_database_config %}-P {{ kea_dhcp_database_config.port }}{% endif %}"
+      - "{% if 'host' in kea_dhcp_database_config %}-h {{ kea_dhcp_database_config.host }}{% endif %}"
   when:
     - kea_dhcp_db_version.stdout != kea_dhcp_version
     - kea_dhcp_db_version is succeeded
   notify: restart kea-dhcp
+  # no_log: true
