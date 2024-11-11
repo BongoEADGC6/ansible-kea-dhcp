@@ -29,6 +29,16 @@ kea_dhcp_ddns_config:
         severity: INFO
         debuglevel: 0
 
+# Parameters for managing database
+# Leave undefined for default memfile
+# kea_dhcp_database_config:
+#   type: pgsql # pgsql or mysql
+#   user: kea
+#   database: kea
+#   password: verysecret
+#   host: pgsql.example.org
+#   port: 5432
+
 # The DHCP configuration below is formatted appropriately to be converted
 # directly to JSON using the kea-dhcp4.conf.j2 Jinja2 template. If you need
 # to add more settings/options below ensure they are added appropriately in

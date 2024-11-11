@@ -26,4 +26,8 @@
   tags:
     - config
 
+- include_tasks:
+    file: database.yml
+  when: kea_dhcp_database_config is defined
+
 - include_tasks: services.yml
