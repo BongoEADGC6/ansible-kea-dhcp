@@ -141,7 +141,6 @@ kea_dhcp_dhcp4_config:
   # Logging configuration starts here. It tells Kea servers to store
   # all log messages (on severity INFO or more) in a file.
   # debuglevel variable is used on DEBUG level only.
-  Logging:
     loggers:
       - name: kea-dhcp4
         output_options:
