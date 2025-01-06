@@ -77,7 +77,7 @@
 - name: set_facts | Setting Repo Info (Debian)
   set_fact:
     kea_dhcp_repo: "{{ 'deb '+kea_dhcp_repos+'/kea-2-3/deb/'+ansible_distribution|lower+' '+ansible_distribution_release|lower+' main' }}"
-    kea_dhcp_repo_key: "{{ kea_dhcp_repos+'/kea-2-3/cfg/gpg/gpg.DA05D46B7BABA24A.key' }}"
+    kea_dhcp_repo_key: "{{ kea_dhcp_repos+'/kea-2-3/gpg.DA05D46B7BABA24A.key' }}"
   when:
     - ansible_os_family == "Debian"
     - kea_dhcp_version is version('2.3', '>=')
@@ -86,7 +86,7 @@
 - name: set_facts | Setting Repo Info (Debian)
   set_fact:
     kea_dhcp_repo: "{{ 'deb '+kea_dhcp_repos+'/kea-2-4/deb/'+ansible_distribution|lower+' '+ansible_distribution_release|lower+' main' }}"
-    kea_dhcp_repo_key: "{{ kea_dhcp_repos+'/kea-2-4/cfg/gpg/gpg.0D9D9A1439E23DB9.key' }}"
+    kea_dhcp_repo_key: "{{ kea_dhcp_repos+'/kea-2-4/gpg.0D9D9A1439E23DB9.key' }}"
   when:
     - ansible_os_family == "Debian"
     - kea_dhcp_version is version('2.4', '>=')
@@ -95,7 +95,7 @@
 - name: set_facts | Setting Repo Info (Debian)
   set_fact:
     kea_dhcp_repo: "{{ 'deb '+kea_dhcp_repos+'/kea-2-5/deb/'+ansible_distribution|lower+' '+ansible_distribution_release|lower+' main' }}"
-    kea_dhcp_repo_key: "{{ kea_dhcp_repos+'/kea-2-5/cfg/gpg/gpg.D4FEAEAEFBD81FB9.key' }}"
+    kea_dhcp_repo_key: "{{ kea_dhcp_repos+'/kea-2-5/gpg.D4FEAEAEFBD81FB9.key' }}"
   when:
     - ansible_os_family == "Debian"
     - kea_dhcp_version is version('2.5', '>=')
@@ -103,7 +103,7 @@
 
 - name: set_facts | Setting Repo Info (RedHat)
   set_fact:
-    kea_dhcp_repo_key: "{{ kea_dhcp_repos+'/kea-2-3/cfg/gpg/gpg.DA05D46B7BABA24A.key' }}"
+    kea_dhcp_repo_key: "{{ kea_dhcp_repos+'/kea-2-3/gpg.DA05D46B7BABA24A.key' }}"
   when:
     - ansible_os_family == "RedHat"
     - kea_dhcp_version is version('2.3', '>=')
@@ -111,7 +111,7 @@
 
 - name: set_facts | Setting Repo Info (RedHat)
   set_fact:
-    kea_dhcp_repo_key: "{{ kea_dhcp_repos+'/kea-2-4/cfg/gpg/gpg.0D9D9A1439E23DB9.key' }}"
+    kea_dhcp_repo_key: "{{ kea_dhcp_repos+'/kea-2-4/gpg.0D9D9A1439E23DB9.key' }}"
   when:
     - ansible_os_family == "RedHat"
     - kea_dhcp_version is version('2.4', '>=')
@@ -119,11 +119,19 @@
 
 - name: set_facts | Setting Repo Info (RedHat)
   set_fact:
-    kea_dhcp_repo_key: "{{ kea_dhcp_repos+'/kea-2-5/cfg/gpg/gpg.D4FEAEAEFBD81FB9.key' }}"
+    kea_dhcp_repo_key: "{{ kea_dhcp_repos+'/kea-2-5/gpg.D4FEAEAEFBD81FB9.key' }}"
   when:
     - ansible_os_family == "RedHat"
     - kea_dhcp_version is version('2.5', '>=')
     - kea_dhcp_version is version('2.6', '<')
+
+- name: set_facts | Setting Repo Info (RedHat)
+  set_fact:
+    kea_dhcp_repo_key: "{{ kea_dhcp_repos+'/kea-2-6/gpg.D4FEAEAEFBD81FB9.key' }}"
+  when:
+    - ansible_os_family == "RedHat"
+    - kea_dhcp_version is version('2.6', '>=')
+    - kea_dhcp_version is version('2.7', '<')
 
 - name: set_facts | Setting Kea Packages (Alpine)
   set_fact:
