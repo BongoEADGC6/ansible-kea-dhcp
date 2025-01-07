@@ -153,7 +153,7 @@
       - isc-kea
   when:
     - ansible_os_family == "RedHat"
-    - ansible_distribution is not "Fedora"
+    - ansible_distribution != "Fedora"
 
 - name: iset_facts | Setting Kea Packages (Fedora)
   set_fact:
