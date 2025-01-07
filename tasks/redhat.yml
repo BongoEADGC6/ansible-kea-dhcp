@@ -27,6 +27,7 @@
     repo_distro: "{% if ansible_distribution == 'Fedora' %}Fedora{% else %}el{% endif %}"
 
 - name: "redhat | Kea DHCP {{ kea_dhcp_version }}"
+  when: ansible_distribution is not "Fedora"
   block:
     - name: redhat | Adding Kea DHCP Repo
       yum_repository:
