@@ -69,3 +69,11 @@
   become: true
   register: result
   until: result is successful
+
+- name: redhat | Socket creation
+  ansible.builtins.file:
+    path: directory
+    owner: kea
+    group: kea
+    dir: "/var/run/kea"
+    mode: '0750'

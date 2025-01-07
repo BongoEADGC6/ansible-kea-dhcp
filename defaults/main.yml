@@ -114,7 +114,7 @@ kea_dhcp_dhcp4_config:
     # next-server: 0.0.0.0
     # control-socket:
     #   socket-type: unix
-    #   socket-name: /var/run/kea.socket
+    #   socket-name: /var/run/kea/kea-dhcp4.socket
   # A sample configuration for HA node follows
     # hooks-libraries:
     #   - library: "{{ kea_dhcp_hooks_dir }}/libdhcp_lease_cmds.so"
@@ -190,7 +190,7 @@ kea_dhcp_ctrl_agent_config:
     control-sockets:
       dhcp4:
         socket-type: "unix"
-        socket-name: "/var/run/kea.socket"
+        socket-name: "/var/run/kea/kea-dhcp4.socket"
     loggers:
       - name: "kea-ctrl-agent"
         output_options:
