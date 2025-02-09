@@ -70,10 +70,18 @@
   register: result
   until: result is successful
 
-- name: redhat | Socket creation
-  ansible.builtins.file:
-    path: directory
+- name: redhat | Socket directory
+  ansible.builtin.file:
+    state: directory
+    path: "/var/run/kea"
     owner: kea
     group: kea
-    dir: "/var/run/kea"
     mode: '0750'
+
+- name: Add Kea log directory
+  ansible.builtin.file:
+    state: directory
+    path: "/var/log/kea"
+    owner: kea
+    group: kea
+    mode: 0755
